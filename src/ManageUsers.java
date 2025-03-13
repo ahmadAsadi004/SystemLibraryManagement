@@ -15,7 +15,7 @@ public class ManageUsers {
         } else System.out.println("User " + name + " already exists");
     }
 
-    public static Users searchUser(String id) {
+    public static Users getUser(String id) {
         if (users.containsKey(id))
             return users.get(id);
         System.out.println("User " + id + " does not exist");
@@ -29,7 +29,5 @@ public class ManageUsers {
         } else System.out.println("User " + id + " does not exist");
     }
 
-    public static Users getUser(String id) {
-        return users.get(id);
-    }
+
 }
