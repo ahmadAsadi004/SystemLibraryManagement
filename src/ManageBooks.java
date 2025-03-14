@@ -20,39 +20,63 @@ public class ManageBooks {
     }
 
     public static Boolean removeLibraryBook(String bookName, int bookCount) {
-        if (BookMap.containsKey(bookName)) {
+        if (isBookInLibrary(bookName)) {
             int currentCount = BookMap.get(bookName);
             if (currentCount - bookCount > 0) {
                 BookMap.put(bookName, currentCount - bookCount);
                 return true;
             } else System.out.println("Book " + bookName + " Unavailable");
-        } else System.out.println("Book " + bookName + " Not found");
+        }
         return false;
     }
 
     public static void updateLibraryBook(String bookName, int bookCount) {
-        if (BookMap.containsKey(bookName)) {
+        if (isBookInLibrary(bookName)) {
             BookMap.put(bookName, bookCount);
             System.out.println("Book " + bookName + " has been updated");
-        } else System.out.println("Book " + bookName + " Not found");
+        }
     }
 
     public static void deleteLibraryBook(String bookName, int bookCount) {
-        if (BookMap.containsKey(bookName)) {
+        if (isBookInLibrary(bookName)) {
             BookMap.remove(bookName);
             System.out.println("Book " + bookName + " has been deleted");
-        } else System.out.println("Book " + bookName + " Not found");
+        }
     }
 
     public static void addBookToUser(String id, String bookName, int bookCount) {
-        if (BookMap.containsKey(bookName)) {
-            var user = ManageUsers.getUser(id);
-            boolean isOk = removeLibraryBook(bookName, bookCount);
-            if (isOk) {
-                assert user != null;
-                user.addBook(bookName, bookCount);
+        if (isBookInLibrary(bookName)) {
+            boolean isRemovedFromLibrary = removeLibraryBook(bookName, bookCount);
+            if (isRemovedFromLibrary) {
+                try {
+                    var user = ManageUsers.getUser(id);
+                    user.addBook(bookName, bookCount);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
 
+    public static void removeBookFromUser(String id, String bookName, int bookCount) {
+        if (isBookInLibrary(bookName)) {
+            try {
+                var user = ManageUsers.getUser(id);
+                boolean isRemovedFromUser = user.removeBook(bookName, bookCount);
+                if (isRemovedFromUser) {
+                    addLibraryBook(bookName, bookCount);
+                    System.out.println("Book " + bookName + " has been deleted From the User " + user.getName());
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private static boolean isBookInLibrary(String bookName) {
+        if (BookMap.containsKey(bookName))
+            return true;
+        System.out.println("Book " + bookName + " Not found");
+        return false;
+    }
 }

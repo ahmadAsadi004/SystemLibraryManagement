@@ -28,13 +28,15 @@ public class Users {
         } else System.out.println("Book " + bookName + " is not added");
     }
 
-    public void removeBook(String book, int amount) {
+    public boolean removeBook(String book, int amount) {
         if (books.containsKey(book)) {
             if (books.get(book) >= amount) {
                 books.put(book, books.get(book) - amount);
                 System.out.println("Book " + book + " has been removed");
+                return true;
             } else System.out.println("Book " + book + " is not removed");
         } else System.out.println("Book " + book + " is not found");
+        return false;
     }
 
     public void deptBook(String book) {
@@ -43,8 +45,8 @@ public class Users {
         else System.out.println("Book " + book + " is not already booked");
     }
 
-    public List<String> getBooks() {
-        return Collections.unmodifiableList(books);
+    public Map<String, Integer> getBooks() {
+        return Collections.unmodifiableMap(books);
     }
 
     @Override
@@ -61,5 +63,9 @@ public class Users {
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }

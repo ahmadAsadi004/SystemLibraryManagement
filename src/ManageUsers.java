@@ -15,11 +15,10 @@ public class ManageUsers {
         } else System.out.println("User " + name + " already exists");
     }
 
-    public static Users getUser(String id) {
+    public static Users getUser(String id) throws Exception {
         if (users.containsKey(id))
             return users.get(id);
-        System.out.println("User " + id + " does not exist");
-        return null;
+        throw new Exception("User " + id + " does not exist");
     }
 
     public static void removeUser(String id) {
