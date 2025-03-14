@@ -7,7 +7,7 @@ public class Users {
     private String gender;
     private final String id;
 
-    private List<String> books = new ArrayList<>();
+    private Map<String, Integer> books = new HashMap<>();
 
     private static int Count;
 
@@ -21,22 +21,24 @@ public class Users {
         Count++;
     }
 
-    public void addBook(String book) {
-        if (!books.contains(book)) {
-            books.add(book);
-            System.out.println("Book added: " + book);
-        } else System.out.println("Book already added");
+    public void addBook(String bookName, int amount) {
+        if (books.containsKey(bookName)) {
+            books.put(bookName, books.get(bookName) + amount);
+            System.out.println("Book " + bookName + " has been added");
+        } else System.out.println("Book " + bookName + " is not added");
     }
 
-    public void removeBook(String book) {
-        if (books.contains(book)) {
-            books.remove(book);
-            System.out.println("Book removed: " + book);
-        } else System.out.println("Book not removed");
+    public void removeBook(String book, int amount) {
+        if (books.containsKey(book)) {
+            if (books.get(book) >= amount) {
+                books.put(book, books.get(book) - amount);
+                System.out.println("Book " + book + " has been removed");
+            } else System.out.println("Book " + book + " is not removed");
+        } else System.out.println("Book " + book + " is not found");
     }
 
     public void deptBook(String book) {
-        if (books.contains(book))
+        if (books.containsKey(book))
             System.out.println("Book " + book + " is already booked");
         else System.out.println("Book " + book + " is not already booked");
     }
