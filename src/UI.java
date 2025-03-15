@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class UI {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void mainMenu(String[] args) {
+    public static void mainMenu() {
         while (true) {
             System.out.println("\n--- Main Menu ---");
             System.out.println("[1] Users Management System");
@@ -36,9 +36,10 @@ public class UI {
             System.out.println("[1] Add User");
             System.out.println("[2] Remove User");
             System.out.println("[3] Search User");
-            System.out.println("[4] Add Book To User");
-            System.out.println("[5] Remove Book From User");
-            System.out.println("[6] Search Book");
+            System.out.println("[4] Show All Users");
+            System.out.println("[5] Add Book To User");
+            System.out.println("[6] Remove Book From User");
+            System.out.println("[7] Search Book");
             System.out.println("[0] Back To Main Menu");
             System.out.print("Enter your choice: ");
 
@@ -46,10 +47,11 @@ public class UI {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Add User functionality here...");
+                    UIAddUser();
                     break;
                 case 2:
                     System.out.println("Remove User functionality here...");
+
                     break;
                 case 3:
                     System.out.println("Returning to Main Menu...");
@@ -60,6 +62,31 @@ public class UI {
                     System.out.println("Invalid choice. Please try again.");
             }
         }
+    }
+
+    private static void UIAddUser() {
+        System.out.println("Add User functionality here...");
+        sleep(1000);
+        System.out.print("Enter your Name: ");
+        String name = scanner.next();
+        System.out.println("Entering Name...");
+        sleep(1000);
+        System.out.print("Enter your Age: ");
+        int age = scanner.nextInt();
+        System.out.println("Entering Age...");
+        sleep(1000);
+        System.out.print("Enter Gender: ");
+        String gender = scanner.next();
+        System.out.println("Entering Gender...");
+        sleep(1000);
+        System.out.print("Enter JoinTime...");
+        int joinTime = scanner.nextInt();
+        System.out.println("Entering JoinTime...");
+        sleep(500);
+        System.out.println("Creating User...");
+        sleep(500);
+        ManageUsers.addUser(name, age, gender, joinTime);
+        sleep(2500);
     }
 
     private static void libraryManagementSystem() {
@@ -76,6 +103,7 @@ public class UI {
             switch (choice) {
                 case 1:
                     System.out.println("Add Book functionality here...");
+
                     break;
                 case 2:
                     System.out.println("Remove Book functionality here...");
@@ -86,6 +114,14 @@ public class UI {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
+        }
+    }
+
+    public static void sleep(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            System.out.println("Sleep interrupted");
         }
     }
 }

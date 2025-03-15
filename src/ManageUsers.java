@@ -11,7 +11,7 @@ public class ManageUsers {
         boolean exists = users.values().stream().anyMatch(user -> user.equals(newUser));
         if (!exists) {
             users.put(id, newUser);
-            System.out.println("User " + name + " has been created");
+            System.out.println("User " + name + " has been created ID " + newUser.getId());
         } else System.out.println("User " + name + " already exists");
     }
 
