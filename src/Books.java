@@ -10,11 +10,21 @@ public class Books {
     }
 
     public void addBooks(String bookName, int count) {
+        if (count <= 0) {
+            System.out.println("Error: Count must be a positive number.");
+            return;
+        }
+
         Books.merge(bookName, count, Integer::sum);
         System.out.println("Book " + bookName + " has been successfully added to the library book Count " + Books.get(bookName));
     }
 
     public boolean removeBooks(String bookName, int count) {
+        if (count <= 0) {
+            System.out.println("Error: Count must be a positive number.");
+            return false;
+        }
+
         if (!Books.containsKey(bookName)) {
             System.out.println("Book " + bookName + " does not exist in the library book");
             return false;
@@ -30,6 +40,11 @@ public class Books {
     }
 
     public void setBooks(String bookName, int count) {
+        if (count <= 0) {
+            System.out.println("Error: Count must be a positive number.");
+            return;
+        }
+
         if (checkBooks(bookName)) {
             Books.put(bookName, count);
             System.out.println("Book " + bookName + " has been updated");
