@@ -38,4 +38,16 @@ public class Users extends Books {
     public String getName() {
         return name;
     }
+
+    public int getJoinTime() {
+        return joinTime;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
 }

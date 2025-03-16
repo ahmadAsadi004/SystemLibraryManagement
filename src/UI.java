@@ -20,7 +20,7 @@ public class UI {
                 case 2:
                     libraryManagementSystem();
                     break;
-                case 3:
+                case 0:
                     System.out.println("Exiting the program... Goodbye!");
                     return;
                 default:
@@ -50,18 +50,65 @@ public class UI {
                     UIAddUser();
                     break;
                 case 2:
-                    System.out.println("Remove User functionality here...");
-
+                    UIRemoveUser();
                     break;
                 case 3:
+                    UISearchUser();
+                    break;
+                case 4:
+                    System.out.println("Showing All Users...");
+                    ManageUsers.showAllUsers();
+
+                    break;
+                case 5:
+
+                    break;
+                case 0:
                     System.out.println("Returning to Main Menu...");
                     return;
-                case 4:
-                    System.out.println("Exiting the program... Goodbye!");
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
+    }
+
+    private static void UISearchUser() {
+        System.out.println("Searching User...");
+        sleep(1000);
+        System.out.print("Enter Id: ");
+        String id = scanner.next();
+        System.out.println("Entering Id...");
+        sleep(1000);
+        try {
+            var target = ManageUsers.getUser(id);
+            System.out.println("-------- User found --------");
+            sleep(1000);
+            System.out.println("------- User Info ------- " +
+                    "\nName: " + target.getName() +
+                    "\nAge: " + target.getAge() +
+                    "\nGender: " + target.getGender() +
+                    "\nJoinTime: " + target.getJoinTime() +
+                    "\nid: " + target.getId()
+            );
+            System.out.println("Returning to Main Menu...");
+            sleep(5000);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            sleep(2000);
+        }
+    }
+
+    private static void UIRemoveUser() {
+        System.out.println("Remove User functionality here...");
+        sleep(1000);
+        System.out.print("Enter your Id: ");
+        String id = scanner.next();
+        System.out.println("Entering Id...");
+        sleep(500);
+        System.out.println("Removing User...");
+        sleep(500);
+        ManageUsers.removeUser(id);
+        sleep(2500);
     }
 
     private static void UIAddUser() {

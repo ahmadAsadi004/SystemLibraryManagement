@@ -28,5 +28,21 @@ public class ManageUsers {
         } else System.out.println("User " + id + " does not exist");
     }
 
+    public static void showAllUsers() {
+        int index = 1;
+        for (var user : users.values()) {
+            System.out.println(
+                    "------ User [" + index + "] ------ " +
+                    "\nName : " + user.getName() +
+                    "\nAge : " + user.getAge() +
+                    "\nGender : " + user.getGender() +
+                    "\nId : " + user.getId() +
+                    "\njoinTime : " + user.getJoinTime()
+            );
+
+            index++;
+            UI.sleep(1000);
+        }
+    }
 
 }
